@@ -1,5 +1,4 @@
-try:import requests,pyttsx3,flask;app=flask.Flask(__name__);all_text='';talk=None
-except ImportError:import os;os.system('python -m pip install pypiwin32 pyttsx3 requests flask');import requests,pyttsx3,flask;app=flask.Flask(__name__);all_text='';talk=None
+try:import requests,flask;app=flask.Flask(__name__);all_text='';talk=None
 class API(object):
     def __init__(self, access_key,endpoint="https://api.intellivoid.net/coffeehouse"):
         if isinstance(access_key, API):self.access_key = access_key.access_key;self.endpoint = access_key.endpoint
