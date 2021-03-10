@@ -1,4 +1,4 @@
-import requests,flask;app=flask.Flask(__name__);all_text='';talk=None
+import requests,flask,sys;app=flask.Flask(__name__);all_text='';talk=None
 class API(object):
     def __init__(self, access_key,endpoint="https://api.intellivoid.net/coffeehouse"):
         if isinstance(access_key, API):self.access_key = access_key.access_key;self.endpoint = access_key.endpoint
@@ -14,7 +14,7 @@ class AI(API):
     def get_session(self, session_id):return Session(self._send("v1/lydia/session/get",session_id=session_id), self)
     def think(self, session_id, text):return self._send("v1/lydia/session/think",session_id=session_id,input=text)["output"]
 @app.route('/')
-def hello():global talk;talk=AI(APIKEY).create_session();return flask.render_template('index.html')
+def hello():global talk;talk=AI(sys.argv[1]).create_session();return flask.render_template('index.html')
 @app.route('/', methods=['POST'])
 def index_post():global all_text;text=flask.request.form['text'];output=talk.think(text);all_text+='You said: '+text+'\n\n'+'Bot said: '+output+'\n\n';return flask.render_template('index.html',text=all_text)
 if __name__ == '__main__':app.run(debug=True)
