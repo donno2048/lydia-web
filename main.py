@@ -17,4 +17,4 @@ class AI(API):
 def hello():global talk;talk=AI(sys.argv[1]).create_session();return flask.render_template('index.html')
 @app.route('/', methods=['POST'])
 def index_post():global all_text;text=flask.request.form['text'];output=talk.think(text);all_text+='You said: '+text+'\n\n'+'Bot said: '+output+'\n\n';return flask.render_template('index.html',text=all_text)
-if __name__ == '__main__':app.run(debug=True)
+if __name__ == '__main__':app.run()
